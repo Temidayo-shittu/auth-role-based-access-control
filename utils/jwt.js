@@ -7,7 +7,11 @@ const createJWT = (user, sessionId) => {
 };
 
 
-const isTokenValid = (token)=> jwt.verify(token, process.env.JWT_SECRET)
+const isTokenValid = (token) => {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return decoded;  // Ensure that sessionId is returned as part of the decoded object
+  }
+  
 
 module.exports = {
     createJWT,

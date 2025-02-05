@@ -19,6 +19,11 @@ const connectDB =  require('./db/connect');
 
 //Routes
 const { authRouter } = require("./routes/authRoutes");
+const { config } = require("./config/global.config");
+
+//Middleware
+const notFoundMiddleware = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
 app.set('trust proxy',1);
 
@@ -52,6 +57,7 @@ const port = process.env.PORT || 5000;
 
 const start = async()=>{
     try {
+        console.log("MongoDB URL:", process.env.MONGO_URL);
         await connectDB(process.env.MONGO_URL);
         app.listen(port, console.log(`Listening on port ${port}`));
     } catch (error) {

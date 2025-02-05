@@ -12,9 +12,10 @@ const login = async(req, res)=>{
     const isPasswordCorrect = await user.comparePassword(password);
     if(!isPasswordCorrect) throw new CustomError.UnauthenticatedError('Invalid Password!! Please input the correct password');
     const session = new Session({  userId: user._id });
-
+    await session.save();
+    console.log( "SessionId:" + session._id);
     const tokenUser = createTokenUser(user);
-    const token = createJWT({ ...tokenUser, sessionId: session._id });;
+    const token = createJWT(tokenUser, session._id);
     
     res.status(StatusCodes.OK).json({ 
         message: `Successfully Logged In ${user.fullname}`,

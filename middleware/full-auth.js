@@ -1,5 +1,6 @@
 const CustomError = require('../errors');
 const { isTokenValid } = require('../utils/jwt');
+const Session = require('../models/Session');
 
 const authenticateUser = async (req, res, next) => {
   let token;
@@ -33,9 +34,11 @@ const authenticateUser = async (req, res, next) => {
 
     next();
   } catch (error) {
+    console.log('Authentication Error:', error.message);
     throw new CustomError.UnauthenticatedError('Authentication failed.');
   }
 };
+
 
 const authorizeRoles = (...roles) => {
   return (req, res, next) => {
@@ -48,4 +51,4 @@ const authorizeRoles = (...roles) => {
   };
 };
 
-module.exports = { authenticateUser, checkBlacklist, authorizeRoles };
+module.exports = { authenticateUser, authorizeRoles };

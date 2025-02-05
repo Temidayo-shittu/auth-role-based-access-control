@@ -20,18 +20,25 @@ const UserSchema= new mongoose.Schema(
             type: String,
     },
     email:{
-        type:String,
-        unique:true,
-        required:[true, 'Please provide your email'],
+        type: String,
+        unique: true,
+        required: [true, 'Please provide your email'],
         validate: {
-            validator:validator.isEmail,
-            message:'Please provide valid email'
+            validator: validator.isEmail,
+            message: 'Please provide valid email'
         }
     },
     password:{
-        type:String,
-        required:[true, 'Please provide your password'],
-        minlength:6
+        type: String,
+        required: [true, 'Please provide your password'],
+        minlength: 8,
+        validate: {
+            validator: function (value) {
+                // Password must contain uppercase, lowercase, number, and special character
+                return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value);
+            },
+            message: 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.',
+        }
     },
     dateOfBirth:{
         type: Date,
@@ -42,8 +49,7 @@ const UserSchema= new mongoose.Schema(
     },
     role:{
         type:String,
-        enum:['ADMIN','SHIPPER','CARRIER'],
-        default:'CARRIER'
+        enum:['ADMIN','SHIPPER','CARRIER']
     },
 },
 {

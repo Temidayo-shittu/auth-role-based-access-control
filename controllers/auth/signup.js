@@ -1,8 +1,6 @@
-const Student = require('../../models/Student');
-const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const { createJWT, createTokenUser, userAge } = require('../../utils');
+const { createTokenUser, userAge } = require('../../utils');
 const User = require('../../models/User');
 
 const userSignup = async(req, res)=>{
@@ -17,7 +15,7 @@ const userSignup = async(req, res)=>{
         email,
         password,
         dateOfBirth,
-        role: role | 'CARRIER'
+        role: role || 'CARRIER'
 		});
 
     user.fullname  = `${firstname} ${lastname}`;
