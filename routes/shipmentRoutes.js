@@ -5,7 +5,7 @@ const { deleteDelivery } = require("../controllers/delivery/deliveryController")
 
 const shipmentRouter = Router();
 
-shipmentRouter.route("/").get([authenticateUser, authorizeRoles('SHIPPER')], createShipment);
+shipmentRouter.route("/").post([authenticateUser, authorizeRoles('SHIPPER')], createShipment);
 shipmentRouter.route("/all").get([authenticateUser, authorizeRoles('SHIPPER','ADMIN')], getAllShipments);
 shipmentRouter.route("/:id").get(authenticateUser, getSingleShipment);
 shipmentRouter.route("/:id").patch([authenticateUser, authorizeRoles('SHIPPER')], updateShipmentStatus);

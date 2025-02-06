@@ -4,7 +4,7 @@ const { deleteDelivery, createDelivery, getAllDeliveries, getSingleDelivery, upd
 
 const deliveryRouter = Router();
 
-deliveryRouter.route("/").get([authenticateUser, authorizeRoles('CARRIER')], createDelivery);
+deliveryRouter.route("/").post([authenticateUser, authorizeRoles('CARRIER')], createDelivery);
 deliveryRouter.route("/all").get([authenticateUser, authorizeRoles('CARRIER','ADMIN')], getAllDeliveries);
 deliveryRouter.route("/:id").get(authenticateUser, getSingleDelivery);
 deliveryRouter.route("/:id").patch([authenticateUser, authorizeRoles('CARRIER')], updateDeliveryStatus);
