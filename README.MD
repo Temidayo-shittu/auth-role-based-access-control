@@ -7,7 +7,7 @@
 # JWT-Based Authentication Schema Design
 
 ## User Story
-This is a secure authentication and role-based access control (RBAC) system built with Node.js, Express.js, and MongoDB. It uses JWT authentication with session management to ensure secure access control.
+This is a secure authentication and role-based access control (RBAC) system built with Node.js, Express.js, and MongoDB. It uses JWT authentication with session management to ensure secure access control. Special privileges were given to certain users based on their roles to access other resources/endpoints.
 
 ## Requirement Analysis
 
@@ -34,10 +34,10 @@ Install dependencies:
 
 Set up environment variables:
 - Create a .env file in the root directory and add the following:
-- PORT=5000
-- MONGO_URL=mongodb://localhost:27017/authRBAC
-- JWT_SECRET=your_secret_key
-- JWT_LIFETIME=1d
+- PORT = 5000
+- MONGO_URL = mongodb+srv://shittutemidayo16:<db_password>@cluster0.pmkuhol.mongodb.net/<db_name>?retryWrites=true&w=majority
+- JWT_SECRET = your_secret_key
+- JWT_LIFETIME = 1d
 
 ### Running the API
 To start the server locally, run:
@@ -45,16 +45,31 @@ To start the server locally, run:
 - The API should now be running at http://localhost:5000
 
 ### RESTful API endpoints
-- Authentication Routes
+
+### Authentication Routes
 - POST /api/v1/auth/user/signup (User Registration)
 - POST /api/v1/auth/admin/signup (Admin Registration)
 - POST /api/v1/auth/login (Login)
 - POST /api/v1/auth/logout (Logout)
 
-- User Routes (All Protected Routes)
+### User Routes (All Protected Routes)
 - GET /api/v1/users/all (Get all users (Admin only))
-- GET /api/v1/users/:id (Get a single user by ID)
-- GET /api/v1/users/ (Get current logged-in user)
+- GET /api/v1/users/:id (Get a single user by ID) - Users can retrieve their user info but cant access the user details of others via the checkPermissions utils function
+- GET /api/v1/users/ (Get current logged-in user) - Displays users details of currently logged users
+
+### Shipment Routes (All Protected Routes)
+- POST /api/v1/shipments/ (Create Shipment accessible only to SHIPPER)
+- GET /api/v1/shipments/all (Get all Shipments (Accessible only to ADMIN,SHIPPER))
+- GET /api/v1/shipments/:id (Get a single shipment by ID) - All Users can retrieve specific shipment details
+- PATCH /api/v1/shipments/:id (Update the Shipment status) - Accessible only to the SHIPPER that created the shipment
+- DELETE /api/v1/shipments/:id (Delete the Shipment) - Accessible only to the SHIPPER that created the shipment and ADMIN 
+
+### Delivery Routes (All Protected Routes)
+- POST /api/v1/deliveries/ (Create Delivery accessible only to CARRIER)
+- GET /api/v1/deliveries/all (Get all Deliveries (Accessible only to ADMIN,CARRIER))
+- GET /api/v1/deliveries/:id (Get a single Delivery by ID) - All Users can retrieve specific delivery details
+- PATCH /api/v1/deliveries/:id (Update the Delivery status) - Accessible only to the CARRIER that created the delivery
+- DELETE /api/v1/deliveries/:id (Delete the Delivery) - Accessible only to the CARRIER that created the shipment and ADMIN 
 
 ### Security Features
 - JWT authentication with session validation
