@@ -16,7 +16,7 @@ const createShipment = async (req,res)=>{
 };
 
 const getAllShipments = async (req,res)=>{
-    const shipments = await Shipment.find({}).populate('user', 'fullname email')
+    const shipments = await Shipment.find({}).populate('user', 'fullname email role')
     res.status(StatusCodes.OK).json({shipments, count:shipments.length})
 };
 
@@ -24,7 +24,7 @@ const getSingleShipment = async (req,res)=>{
     const validUser = await User.findById(req.user.userId);
     if(!validUser) throw new CustomError.NotFoundError(`User with ID:${req.user.userId} does not exist`);
     const { id:shipmentId } = req.params
-    const shipment = await Shipment.findById(shipmentId).populate('user', 'fullname email')
+    const shipment = await Shipment.findById(shipmentId).populate('user', 'fullname email role')
     if(!shipment) throw new CustomError.NotFoundError(`No shipment with ID:${shipmentId} exists`);
     //checkPermissions(req.user, shipment.user._id);
     res.status(StatusCodes.OK).json({shipment})

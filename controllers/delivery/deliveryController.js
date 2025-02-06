@@ -16,7 +16,7 @@ const createDelivery = async (req,res)=>{
 };
 
 const getAllDeliveries = async (req,res)=>{
-    const deliveries = await Delivery.find({}).populate('user', 'fullname email')
+    const deliveries = await Delivery.find({}).populate('user', 'fullname email role')
     res.status(StatusCodes.OK).json({deliveries, count:deliveries.length})
 };
 
@@ -24,7 +24,7 @@ const getSingleDelivery = async (req,res)=>{
     const validUser = await User.findById(req.user.userId);
     if(!validUser) throw new CustomError.NotFoundError(`User with ID:${req.user.userId} does not exist`);
     const { id:deliveryId } = req.params
-    const delivery = await Delivery.findById(deliveryId).populate('user', 'fullname email')
+    const delivery = await Delivery.findById(deliveryId).populate('user', 'fullname email role')
     if(!delivery) throw new CustomError.NotFoundError(`No delivery with ID:${deliveryId} exists`);
     res.status(StatusCodes.OK).json({delivery})
 };
