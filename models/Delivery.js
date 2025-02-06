@@ -18,6 +18,10 @@ const DeliverySchema = new mongoose.Schema({
       type: Date,
       required: true
     },
+    delivery_fee: {
+        type: Number,
+        required: true
+      },
     status: {
       type: String,
       enum: ['PENDING', 'OUT_FOR_DELIVERY', 'DELIVERED'],

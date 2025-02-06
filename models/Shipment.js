@@ -18,6 +18,10 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  shipment_fee: {
+    type: Number,
+    required: true
+  },
   status: {
     type: String,
     enum: ['PENDING', 'IN_TRANSIT', 'DELIVERED'],
