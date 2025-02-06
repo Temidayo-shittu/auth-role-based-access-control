@@ -19,7 +19,7 @@ const connectDB =  require('./db/connect');
 
 //Routes
 const { authRouter } = require("./routes/authRoutes");
-const { config } = require("./config/global.config");
+const {userRouter} = require("./routes/userRoutes");
 
 //Middleware
 const notFoundMiddleware = require('./middleware/not-found');
@@ -44,11 +44,12 @@ app.get("/", (req, res) => res.send("API is up and running"));
 app.get("/api/v1", (req, res) => {
     res.json({
         message:"JWT-Based Authentication System API V1, [Health check::: API up and running]",
-        //postmanLink: "https://www.postman.com/galactic-resonance-793427/workspace/babban-gona-hackathon/collection/26636754-1a805b8c-845a-4776-a9fd-1ca256404349?action=share&creator=26636754"
+        postmanLink: "https://galactic-resonance-793427.postman.co/workspace/TINKTEQ~d4473f16-880b-4a7f-8abf-e7b53be2711a/collection/26636754-b7ee598b-88c1-40a6-accd-d80805df7dcf?action=share&creator=26636754"
     })
 });
 
-app.use(`${config.api.prefix}/auth`, authRouter);
+app.use(`/api/v1/auth`, authRouter);
+app.use('/api/v1/users',userRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

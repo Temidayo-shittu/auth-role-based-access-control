@@ -6,7 +6,6 @@ const { authenticateUser } = require("../middleware/full-auth");
 
 const authRouter = Router();
 
-// Admin level routes
 authRouter.route("/user/signup").post(userSignup);
 authRouter.route("/admin/signup").post(adminSignup);
 authRouter.route("/login").post(login);

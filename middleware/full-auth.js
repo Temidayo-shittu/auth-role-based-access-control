@@ -35,7 +35,7 @@ const authenticateUser = async (req, res, next) => {
     next();
   } catch (error) {
     console.log('Authentication Error:', error.message);
-    throw new CustomError.UnauthenticatedError('Authentication failed.');
+    throw new CustomError.UnauthenticatedError(error.message);
   }
 };
 
