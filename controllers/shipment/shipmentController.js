@@ -1,7 +1,7 @@
 const Shipment = require('../../models/Shipment')
 const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../../errors')
-const { checkPermissions } = require('../../utils/checkPermissions');
+const { checkPermissions } = require('../../utils');
 const User = require('../../models/User');
 const { trackingNumber } = require('../../utils/randomString');
 
