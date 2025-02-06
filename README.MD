@@ -1,6 +1,6 @@
 ## Hosted Project
 
-[JWT-Based Authentication URL](https://amethyst-coypu-gown.cyclic.app/api/v1)
+[JWT-Based Authentication URL](https://auth-role-based-access-control.onrender.com/api/v1)
 
 #### Setup Basic Express Server
 
@@ -13,20 +13,20 @@ This is a secure authentication and role-based access control (RBAC) system buil
 
 ### Features:
 - User authentication (signup, login, logout)
-- Role-based access control (RBAC) (e.g., Admin, User)
+- Role-based access control (RBAC) (e.g., ADMIN, SHIPPER, CARRIER)
 - JWT authentication with session tracking
 - Secure API with best practices (Helmet, CORS, Rate Limiting, XSS Protection, MongoDB Sanitization)
 - Modular architecture with middleware for authentication and authorization
 
 ### Prerequisites:
 - Before you begin, ensure you have the following installed:
-- Node.js (v16 or later)
+- Node.js (v22 or later)
 - MongoDB (Local or Cloud Instance)
 - Postman (For testing API requests)
 
 ### Installation
 Clone the repository: 
-- git clone https://github.com/your-repo/auth-rbac.git
+- git clone https://github.com/Temidayo-shittu/auth-role-based-access-control.git
 - cd auth-rbac
 
 Install dependencies:
@@ -65,6 +65,15 @@ To start the server locally, run:
 - XSS Clean to sanitize user input
 - MongoDB Sanitization to prevent NoSQL injections
 
+### Deployment on Render
+To deploy this API on Render:
+- Create a new Web Service on Render.
+- Connect your GitHub repository containing this project.
+- Set environment variables in the Render dashboard (same as the .env file).
+- Choose the build command: npm install && npm run build
+- Set the start command: npm start
+- Deploy and monitor logs to ensure everything runs correctly.
+
 ### Troubleshooting
 - Module not found error? Ensure you have installed all dependencies with npm install.
 - MongoDB connection issues? Check if your MONGO_URL in .env is correct and MongoDB is running.
@@ -74,5 +83,5 @@ To start the server locally, run:
 https://galactic-resonance-793427.postman.co/workspace/TINKTEQ~d4473f16-880b-4a7f-8abf-e7b53be2711a/collection/26636754-b7ee598b-88c1-40a6-accd-d80805df7dcf?action=share&creator=26636754
 
 ### Server Link:
-https://amethyst-coypu-gown.cyclic.app/api/v1
+https://auth-role-based-access-control.onrender.com/api/v1
 
